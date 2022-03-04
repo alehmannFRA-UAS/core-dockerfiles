@@ -4,7 +4,7 @@
 
 First set the Container Image Name to fgftk/mysqlcore:latest (see figure)
 
-![](/home/emulator/dockerfiles/mysql-core/img/node.jpg) 
+![](https://github.com/alehmannFRA-UAS/core-dockerfiles/blob/main/mysql-core/img/node.jpg) 
 
 ### Prerequisities
 
