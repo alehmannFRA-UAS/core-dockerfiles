@@ -6,85 +6,38 @@ First set the Container Image Name to fgftk/mysqlcore:latest (see figure)
 
 ![](https://github.com/alehmannFRA-UAS/core-dockerfiles/blob/main/mysql-core/img/node.jpg) 
 
-### Prerequisities
+Next open Services and choose UserDefined service. Create a shell script as depicted.
 
+![](https://github.com/alehmannFRA-UAS/core-dockerfiles/blob/main/mysql-core/img/userDefined.jpg)
 
-In order to run this container you'll need docker installed.
-
-* [Windows](https://docs.docker.com/windows/started)
-* [OS X](https://docs.docker.com/mac/started/)
-* [Linux](https://docs.docker.com/linux/started/)
-
-### Usage
-
-#### Container Parameters
-
-List the different parameters available to your container
-
-```shell
-docker run give.example.org/of/your/container:v0.2.1 parameters
-```
-
-One example per permutation 
-
-```shell
-docker run give.example.org/of/your/container:v0.2.1
-```
-
-Show how to get a shell started in your container too
-
-```shell
-docker run give.example.org/of/your/container:v0.2.1 bash
-```
+Do not forget to set it as startup script in tab Startup/shutdown, e.g., sh startmysql.sh.
 
 #### Environment Variables
 
-* `VARIABLE_ONE` - A Description
-* `ANOTHER_VAR` - More Description
-* `YOU_GET_THE_IDEA` - And another
+When you start the mysql image, you can adjust the configuration of the MySQL instance by passing one or more environment variables. These variables must passed by the start script, e.g., `export MYSQL_ROOT_PASSWORD=test`
 
-#### Volumes
+`MYSQL_ROOT_PASSWORD` - This variable is mandatory and specifies the password that will be set for the MySQL root superuser account. In the above example, it was set to test.
 
-* `/your/file/location` - File location
+`MYSQL_DATABASE` - This variable is optional and allows you to specify the name of a database to be created on image startup. If a user/password was supplied (see below) then that user will be granted superuser access (corresponding to GRANT ALL) to this database.
 
-#### Useful File Locations
+`MYSQL_USER, MYSQL_PASSWORD` - These variables are optional, used in conjunction to create a new user and to set that user's password. This user will be granted superuser permissions (see above) for the database specified by the MYSQL_DATABASE variable. Both variables are required for a user to be created. Do note that there is no need to use this mechanism to create the root superuser, that user gets created by default with the password specified by the MYSQL_ROOT_PASSWORD variable.
 
-* `/some/special/script.sh` - List special scripts
-  
-* `/magic/dir` - And also directories
+`MYSQL_ALLOW_EMPTY_PASSWORD` - This is an optional variable. Set to a non-empty value, like yes, to allow the container to be started with a blank password for the root user. NOTE: Setting this variable to yes is not recommended unless you really know what you are doing, since this will leave your MySQL instance completely unprotected, allowing anyone to gain complete superuser access.
 
-## Built With
+`MYSQL_RANDOM_ROOT_PASSWORD` - This is an optional variable. Set to a non-empty value, like yes, to generate a random initial password for the root user (using pwgen). The generated root password will be printed to stdout (GENERATED ROOT PASSWORD: .....).
 
-* List the software v0.1.3
-* And the version numbers v2.0.0
-* That are in this container v0.3.2
+`MYSQL_ONETIME_PASSWORD` - Sets root (not the user specified in MYSQL_USER!) user as expired once init is complete, forcing a password change on first login. Any non-empty value will activate this setting. NOTE: This feature is supported on MySQL 5.6+ only. Using this option on MySQL 5.5 will throw an appropriate error during initialization.
 
-## Find Us
+`MYSQL_INITDB_SKIP_TZINFO` - By default, the entrypoint script automatically loads the timezone data needed for the CONVERT_TZ() function. If it is not needed, any non-empty value disables timezone loading.
 
-* [GitHub](https://github.com/your/repository)
-* [Quay.io](https://quay.io/repository/your/docker-repository)
+## Dockerfile
 
-## Contributing
-
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the 
-[tags on this repository](https://github.com/your/repository/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/repository/contributors) who 
-participated in this project.
+* [GitHub](https://github.com/alehmannFRA-UAS/core-dockerfiles)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+View [license information](https://www.mysql.com/about/legal/) for the software contained in this image.
 
-## Acknowledgments
+As with all Docker images, these likely also contain other software which may be under other licenses (such as Bash, etc from the base distribution, along with any direct or indirect dependencies of the primary software being contained).
 
-* People you want to thank
-* If you took a bunch of code from somewhere list it here
+As for any pre-built image usage, it is the image user's responsibility to ensure that any use of this image complies with any relevant licenses for all software contained within.
