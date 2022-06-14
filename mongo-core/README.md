@@ -5,6 +5,7 @@
 First set the Container Image Name to fgftk/mongocore:latest
 
 Next open Services and choose UserDefined service. Create a shell script as depicted (example of another service).
+Please replace with following: su mongodb -c "bash docker-entrypoint.sh mongod"
 
 ![userdefined.jpg](https://github.com/alehmannFRA-UAS/core-dockerfiles/blob/main/mysql-core/img/userDefined.jpg?raw=true)
 
