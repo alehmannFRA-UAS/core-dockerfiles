@@ -4,13 +4,12 @@
 
 First set the Container Image Name to fgftk/mysqlcore:latest (see figure)
 
-![](https://github.com/alehmannFRA-UAS/core-dockerfiles/blob/main/mysql-core/img/node.jpg) 
+![node.jpg](https://github.com/alehmannFRA-UAS/core-dockerfiles/blob/main/mysql-core/img/node.jpg?raw=true) 
 
-Next open Services and choose UserDefined service. Create a shell script as depicted.
+Next open Services and choose UserDefined service. Create a shell script start.sh as depicted.
 
-![](https://github.com/alehmannFRA-UAS/core-dockerfiles/blob/main/mysql-core/img/userDefined.jpg)
+![userdefined.jpg](https://github.com/alehmannFRA-UAS/core-dockerfiles/blob/main/mysql-core/img/userDefined.jpg?raw=true)
 
-Do not forget to set it as startup script in tab Startup/shutdown, e.g., sh startmysql.sh.
 
 #### Environment Variables
 
